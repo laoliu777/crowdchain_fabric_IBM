@@ -90,7 +90,7 @@ const columns = [
 const data = [
         {
         testReport: "5cc30cf2825a8960cdc7bd6c",
-        playername: "ZhangHaoming",
+        playername: "WJANGLAHG",
         subtime:"2019-12-10 12:01:34"
     },
     {
