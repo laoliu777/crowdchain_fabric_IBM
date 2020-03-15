@@ -1,0 +1,45 @@
+package com.crowdchain.crowdchaindemo.user;
+
+import com.crowdchain.crowdchaindemo.client.CAClient;
+import com.crowdchain.crowdchaindemo.config.Config;
+import com.crowdchain.crowdchaindemo.util.Util;
+
+/**
+ *
+ * @author Balaji Kadambi
+ *
+ */
+
+public class RegisterEnrollUser {
+
+    //public void registerEnrollUser() {
+    public static void main(String args[]) {
+        try {
+            Util.cleanUp();
+            String caUrl = Config.CA_ORG1_URL;
+            CAClient caClient = new CAClient(caUrl, null);
+            // Enroll Admin to Org1MSP
+            com.crowdchain.crowdchaindemo.user.UserContext adminUserContext = new com.crowdchain.crowdchaindemo.user.UserContext();
+            adminUserContext.setName(Config.ADMIN);
+            adminUserContext.setAffiliation(Config.ORG1);
+            adminUserContext.setMspId(Config.ORG1_MSP);
+            caClient.setAdminUserContext(adminUserContext);
+            adminUserContext = caClient.enrollAdminUser(Config.ADMIN, Config.ADMIN_PASSWORD);
+
+            // Register and Enroll user to Org1MSP
+            com.crowdchain.crowdchaindemo.user.UserContext userContext = new com.crowdchain.crowdchaindemo.user.UserContext();
+            String name = "user"+System.currentTimeMillis();
+            userContext.setName(name);
+            userContext.setAffiliation(Config.ORG1);
+            userContext.setMspId(Config.ORG1_MSP);
+
+            String eSecret = caClient.registerUser(name, Config.ORG1);
+
+            userContext = caClient.enrollUser(userContext, eSecret);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+}
