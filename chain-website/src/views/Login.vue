@@ -55,7 +55,7 @@ export default {
                 password: this.form.getFieldValue("password")
             };
 
-            if (data.username == "ZhangHaoming" && data.password == 123456) {
+            if (data.username == "WORK" && data.password == 123456) {
                 // 测试 直接跳转
                 setTimeout(() => {
                     this.$message.success("登陆成功！");
